@@ -94,4 +94,7 @@ abstract class Game
     {
         return in_array($this->id(), $supportedGames, true);
     }
+
+    abstract public function getServerCreateView();
+    abstract public function getServerEditView();
 }

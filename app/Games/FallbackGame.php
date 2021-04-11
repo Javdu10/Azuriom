@@ -43,4 +43,14 @@ class FallbackGame extends Game
     {
         return empty($supportedGames);
     }
+
+    public function getServerCreateView()
+    {
+        abort(404);
+    }
+
+    public function getServerEditView()
+    {
+        abort(404);
+    }
 }

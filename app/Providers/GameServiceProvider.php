@@ -23,17 +23,17 @@ class GameServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        self::registerGames([
-            'mc-online' => MinecraftOnlineGame::class,
-            'mc-offline' => MinecraftOfflineGame::class,
-            'mc-bedrock' => MinecraftBedrockGame::class,
-            'gmod' => SteamGame::forName('gmod', 'Garry\'s Mod'),
-            'ark' => SteamGame::forName('ark', 'ARK'),
-            'rust' => RustGame::class,
-            'fivem' => FiveMGame::class,
-            'csgo' => SteamGame::forName('csgo', 'CS:GO'),
-            'tf2' => SteamGame::forName('tf2', 'Team Fortress 2'),
-        ]);
+        // self::registerGames([
+        //     'mc-online' => MinecraftOnlineGame::class,
+        //     'mc-offline' => MinecraftOfflineGame::class,
+        //     'mc-bedrock' => MinecraftBedrockGame::class,
+        //     'gmod' => SteamGame::forName('gmod', 'Garry\'s Mod'),
+        //     'ark' => SteamGame::forName('ark', 'ARK'),
+        //     'rust' => RustGame::class,
+        //     'fivem' => FiveMGame::class,
+        //     'csgo' => SteamGame::forName('csgo', 'CS:GO'),
+        //     'tf2' => SteamGame::forName('tf2', 'Team Fortress 2'),
+        // ]);
     }
 
     /**
@@ -58,5 +58,10 @@ class GameServiceProvider extends ServiceProvider
     public static function registerGames(array $games)
     {
         static::$games = array_merge(static::$games, $games);
+    }
+
+    public static function getAvailableGames()
+    {
+        return array_keys(static::$games);
     }
 }

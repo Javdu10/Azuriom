@@ -313,19 +313,11 @@ return [
             'connect-success' => 'La connexion au serveur a été effectuée avec succès !',
             'connect-error' => 'La connexion au serveur a échouée: :error',
 
-            'not-azlink' => 'Ce serveur n\'est pas connecté via AzLink.',
-            'azlink-connect' => 'La connexion au serveur a échouée, l\'adresse et/ou le port sont incorrects, ou le port est fermé.',
-            'azlink-badresponse' => 'La connexion au serveur a échouée (code :code), le token est invalide ou le serveur est mal configuré. Vous pouvez refaire la commande de link pour y remédier.',
         ],
 
         'type' => [
-            'mc-ping' => 'Minecraft Ping',
-            'mc-rcon' => 'Minecraft RCON',
-            'mc-azlink' => 'AzLink',
             'source-query' => 'Source Query',
             'source-rcon' => 'RCON Source',
-            'bedrock-ping' => 'Ping Bedrock',
-            'bedrock-rcon' => 'RCON Bedrock',
             'fivem-status' => 'Statut FiveM',
             'fivem-rcon' => 'RCON FiveM',
             'rust-rcon' => 'Rust RCON',

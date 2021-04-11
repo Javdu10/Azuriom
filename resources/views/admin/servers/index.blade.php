@@ -70,7 +70,7 @@
                                     <span class="badge badge-danger">{{ trans('admin.servers.offline') }}</span>
                                 @endif
                             </td>
-                            <td>{{ trans('admin.servers.type.'.$server->type) }}</td>
+                            <td>{{ game()->trans($server->type) }}</td>
                             <td>
                                 <a href="{{ route('admin.servers.edit', $server) }}" class="mx-1" title="{{ trans('messages.actions.edit') }}" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('admin.servers.destroy', $server) }}" class="mx-1" title="{{ trans('messages.actions.delete') }}" data-toggle="tooltip" data-confirm="delete"><i class="fas fa-trash"></i></a>

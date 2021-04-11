@@ -269,38 +269,13 @@ return [
         'default' => 'Default server',
         'default-info' => 'The number of players connected from the default server will be displayed on the site if the current theme supports it.',
 
-        'ping-no-commands' => 'The ping link doesn\'t need a plugin, but you can\'t execute commands with it.',
-        'query-no-commands' => 'With query link, it\'s not possible to execute commands on the server.',
-
-        'query-port-info' => 'Can be empty if it\'s the same as the game port.',
-
         'fields' => [
             'address' => 'Address',
             'port' => 'Port',
-
-            'rcon-password' => 'Rcon Password',
-            'rcon-port' => 'Rcon Port',
-            'query-port' => 'Source Query Port',
-
-            'azlink-port' => 'AzLink Port',
         ],
 
         'actions' => [
             'verify-connection' => 'Verify the connection',
-        ],
-
-        'azlink' => [
-            'link' => 'To link Minecraft to your website using AzLink:',
-            'link-1' => '<a href="https://azuriom.com/azlink">Download the plugin AzLink</a> and install it on your server.',
-            'link-2' => 'Restart the server.',
-            'link-3' => 'Execute this command on the server: ',
-
-            'link-info' => 'You can link your Minecraft server to your website with the command: ',
-            'port-info' => 'If you are using a different AzLink port than the default, you must configure it with the command: ',
-
-            'enable-ping' => 'Enable instant commands (require an open port on the server)',
-            'ping-info' => 'When instant commands are not enabled, commands will be executed with a delay of 30 seconds to 1 minute.',
-            'custom-port' => 'Use a custom AzLink port',
         ],
 
         'players' => ':count player|:count players',
@@ -313,20 +288,11 @@ return [
 
             'connect-success' => 'The connection to the server has been made successfully!',
             'connect-error' => 'The connection to the server failed: :error',
-
-            'not-azlink' => 'This server is not connected via AzLink.',
-            'azlink-connect' => 'The connection to the server has failed, the address and/or port are incorrect, or the port is closed.',
-            'azlink-badresponse' => 'The connection to the server has failed (code :code), the token is invalid or the server is misconfigured. You can redo the link command to fix this.',
         ],
 
         'type' => [
-            'mc-ping' => 'Minecraft Ping',
-            'mc-rcon' => 'Minecraft RCON',
-            'mc-azlink' => 'AzLink',
             'source-query' => 'Source Query',
             'source-rcon' => 'Source RCON',
-            'bedrock-ping' => 'Bedrock Ping',
-            'bedrock-rcon' => 'Bedrock RCON',
             'fivem-status' => 'FiveM status',
             'fivem-rcon' => 'FiveM RCON',
             'rust-rcon' => 'Rust RCON',

@@ -111,8 +111,8 @@ Route::resource('posts.attachments', PostAttachmentController::class)->only('sto
 Route::post('pages/attachments/{pendingId}', [PageAttachmentController::class, 'pending'])->name('pages.attachments.pending');
 Route::post('posts/attachments/{pendingId}', [PostAttachmentController::class, 'pending'])->name('posts.attachments.pending');
 
-Route::resource('servers', ServerController::class)->except('show');
-Route::post('/servers/{server}/verify/azlink', [ServerController::class, 'verifyAzLink'])->name('servers.verify-azlink');
+Route::resource('servers', ServerController::class)->except(['show', 'store', 'update']);
+
 Route::post('/servers/default', [ServerController::class, 'changeDefault'])->name('servers.change-default');
 
 Route::post('logs/clear', [ActionLogController::class, 'clear'])->name('logs.clear')->middleware('can:admin.logs');

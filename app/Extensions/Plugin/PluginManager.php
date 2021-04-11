@@ -2,20 +2,21 @@
 
 namespace Azuriom\Extensions\Plugin;
 
+use Throwable;
 use Azuriom\Azuriom;
-use Azuriom\Extensions\ExtensionManager;
-use Azuriom\Extensions\UpdateManager;
+use RuntimeException;
 use Azuriom\Support\Files;
-use Azuriom\Support\Optimizer;
-use Composer\Autoload\ClassLoader;
 use Composer\Semver\Semver;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use RuntimeException;
-use Throwable;
+use Azuriom\Support\Optimizer;
+use Azuriom\Games\FallbackGame;
+use Composer\Autoload\ClassLoader;
+use Azuriom\Extensions\UpdateManager;
+use Illuminate\Filesystem\Filesystem;
+use Azuriom\Extensions\ExtensionManager;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class PluginManager extends ExtensionManager
 {
@@ -426,7 +427,12 @@ class PluginManager extends ExtensionManager
                 return isset($plugin->apiId);
             });
 
+        $noGameInstalled = game() instanceof FallbackGame;
         return collect($plugins)
+            ->filter(function($plugin) use ($noGameInstalled){
+                //TODO: check plugin tag for core or something related to a game implementation
+                return !$noGameInstalled || $plugin['extension_id'] === 'minecraft';
+            })
             ->filter(function ($plugin) use ($installedPlugins) {
                 return ! $installedPlugins->contains('apiId', $plugin['id']);
             })->filter(function ($plugin) {

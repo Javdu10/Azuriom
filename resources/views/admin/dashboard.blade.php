@@ -31,6 +31,12 @@
         </div>
     @endforeach
 
+    @if($NoGameInstalled)
+        <div class="alert alert-danger shadow-sm" role="alert">
+            <a href="{{route('admin.plugins.index')}}">Click here to configure your game!</a>
+        </div>
+    @endif
+
     <!-- Content Row -->
     <div class="row">
 

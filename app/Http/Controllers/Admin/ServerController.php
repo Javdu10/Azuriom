@@ -54,36 +54,10 @@ class ServerController extends Controller
      */
     public function create()
     {
-        return view('admin.servers.create', ['types' => Server::types()]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Azuriom\Http\Requests\ServerRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ServerRequest $request)
-    {
-        try {
-            $server = new Server($request->validated() + ['token' => Str::random(32)]);
-
-            if (! $server->bridge()->verifyLink()) {
-                throw new RuntimeException('Unable to connect to the server');
-            }
-        } catch (Exception $e) {
-            return redirect()->back()->withInput()->with('error', trans('admin.servers.status.connect-error', [
-                'error' => $e->getMessage(),
-            ]));
-        }
-
-        $server->save();
-
-        if ($request->input('redirect') === 'edit') {
-            return redirect()->route('admin.servers.edit', $server);
-        }
-
-        return redirect()->route('admin.servers.index')->with('success', trans('admin.servers.status.created'));
+        return view(
+            game()->getServerCreateView(), 
+            ['types' => Server::types()]
+        );
     }
 
     /**
@@ -94,70 +68,11 @@ class ServerController extends Controller
      */
     public function edit(Server $server)
     {
-        return view('admin.servers.edit', [
+        return view(
+            game()->getServerEditView(), [
             'server' => $server,
             'types' => Server::types(),
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Azuriom\Http\Requests\ServerRequest  $request
-     * @param  \Azuriom\Models\Server  $server
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ServerRequest $request, Server $server)
-    {
-        $server->fill($request->validated());
-
-        try {
-            if (! $server->bridge()->verifyLink()) {
-                throw new RuntimeException('Unable to connect to the server');
-            }
-        } catch (Exception $e) {
-            return redirect()->back()->withInput()->with('error', trans('admin.servers.status.connect-error', [
-                'error' => $e->getMessage(),
-            ]));
-        }
-        $server->save();
-
-        return redirect()->route('admin.servers.index')->with('success', trans('admin.servers.status.updated'));
-    }
-
-    public function verifyAzLink(ServerRequest $request, Server $server)
-    {
-        if ($server->type !== 'mc-azlink') {
-            return response()->json([
-                'message' => trans('admin.servers.status.not-azlink'),
-            ], 422);
-        }
-
-        $server->fill($request->validated());
-
-        try {
-            $response = $server->bridge()->sendServerRequest();
-
-            if (! $response->successful()) {
-                return response()->json([
-                    'message' => trans('admin.servers.status.azlink-badresponse', [
-                        'code' => $response->status(),
-                    ]),
-                ], 422);
-            }
-
-            return response()->json([
-                'message' => trans('admin.servers.status.connect-success'),
-            ]);
-        } catch (ConnectionException $e) {
-            return response()->json([
-                'message' => trans('admin.servers.status.azlink-connect'),
-            ], 422);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => trans('messages.status-error', ['error' => $e->getMessage()]),
-            ], 422);
-        }
     }
 
     /**

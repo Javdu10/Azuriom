@@ -2,15 +2,16 @@
 
 namespace Azuriom\Http\Controllers\Admin;
 
-use Azuriom\Extensions\UpdateManager;
-use Azuriom\Http\Controllers\Controller;
-use Azuriom\Models\Image;
 use Azuriom\Models\Page;
 use Azuriom\Models\Post;
 use Azuriom\Models\User;
+use Azuriom\Models\Image;
 use Azuriom\Support\Charts;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Azuriom\Games\FallbackGame;
+use Azuriom\Extensions\UpdateManager;
+use Azuriom\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
 
 class AdminController extends Controller
 {
@@ -47,6 +48,7 @@ class AdminController extends Controller
             'activeUsers' => $this->getActiveUsers(),
             'newVersion' => $newVersion,
             'apiAlerts' => $updates->getApiAlerts(),
+            'NoGameInstalled' => game() instanceof FallbackGame
         ]);
     }
 
